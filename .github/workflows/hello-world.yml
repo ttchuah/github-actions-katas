@@ -2,7 +2,6 @@ name: CI
 
 on:
   push:
-
     branches: ["main"]
   pull_request:
     branches: ["main"]
@@ -12,11 +11,13 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+    container: gradle:6-jdk11
     steps:
-      - uses: actions/checkout@v4
+      - name: Clone down repository
+        uses: actions/checkout@v4
       
       - name: build
-        run: ./ci/build-app.sh
+        run: ci/build-app.sh
       
       - name: test
         run: ./ci/unit-test-app.sh
