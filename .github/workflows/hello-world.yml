@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+  workflow_dispatch:
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: build
+        run: ci/build-app.sh
+      
+      - name: test
+        run: ci/unit-test-app.sh
+
+
+# build_docker_image:
+# push_docker_image:
+# component_test:
+# performance_test:
